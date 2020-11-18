@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout{% endblock %}
+
+{% block body %}
+<h2>Ajout d'un produit</h2>
+<h3>le produit de id : {{ produit.id }} a été enregistré avec succés...</h3>
+
+<a href="{{path('produit_list')}}">Voir la liste des produits</a>
+
+{% endblock %}
