@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste{% endblock %}
+
+{% block body %}
+<h2>Liste de tous les produits</h2>
+<ul>
+
+</ul>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Champ</th>
+      <th scope="col">Valeur</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    
+    
+    <td>ID</td>
+    <td>{{ prod.id }}</td>
+    <tr>
+<td>PRIX</td>
+    <td>{{ prod.prix }}</td>
+
+    </tr>
+<td>QUANTITE</td>
+    <td>{{ prod.quantite}}</td>
+
+    <tr>
+<td>DESCRIPTION </td>
+    <td>{{ prod.description }}</td>
+
+    </tr>
+    
+    
+    
+  </tbody>
+</table>
+<a href="{{path('produit_list')}}">Voir la liste des produits</a>
+
+{% endblock %}

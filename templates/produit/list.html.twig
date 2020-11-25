@@ -15,6 +15,8 @@
       <th scope="col">Nom</th>
       <th scope="col">Prix</th>
       <th scope="col">Description</th>
+      <th>Détails</th>
+      <th>Suppression</th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +26,8 @@
       <td>{{ prod.nom}}</td>
       <td>{{ prod.prix}}</td>
       <td>{{ prod.description }}</td>
+      <td><a href="{{ path('produit_show',{'id':prod.id})}}">Voir détails</a> </td>
+      <td><a href="{{ path('produit_delete',{'id':prod.id})}}">Supprimer</a> </td>
     </tr>
 {% endfor %}
     

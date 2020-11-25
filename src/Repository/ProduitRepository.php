@@ -47,4 +47,34 @@ class ProduitRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function chercherParPrix($p1,$p2)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Produit p
+            WHERE p.prix > :p1 and p.prix < :p2
+            ORDER BY p.prix ASC'
+        );
+        $query->setParameter('p1', $p1);
+        $query->setParameter('p2',$p2);
+
+        // returns an array of Product objects
+        $tabProduits= $query->getResult();
+        return $tabProduits;
+
+    }
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('p.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
 }

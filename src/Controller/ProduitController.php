@@ -42,4 +42,64 @@ class ProduitController extends AbstractController
        
         return $this->render('produit/list.html.twig', ['produits'=>$produits]);
     }
+      /**
+     * @Route("/chercher/produits/{pmin}/{pmax}", name="produit_chercher")
+     */
+    public function chercherParPrix($pmin,$pmax)
+    {
+        
+        $produits=$this->getDoctrine()->getRepository(Produit::class)->chercherParPrix($pmin,$pmax);
+        //$produits=$this->getDoctrine()->getRepository(Produit::class)->chercheProduits();
+
+
+       
+        return $this->render('produit/list.html.twig', ['produits'=>$produits]);
+    }
+    /**
+     * @Route("/produits/{id}", name="produit_show")
+     */
+    public function show($id)
+    {
+        
+        $produit=$this->getDoctrine()->getRepository(Produit::class)->find($id);
+        //$produits=$this->getDoctrine()->getRepository(Produit::class)->chercheProduits();
+
+
+       
+        return $this->render('produit/show.html.twig', ['prod'=>$produit]);
+    }
+    /**
+     * @Route("/produits/delete/{id}", name="produit_delete")
+     */
+    public function delete($id)
+    {
+        
+        $produit=$this->getDoctrine()->getRepository(Produit::class)->find($id);
+        //$produits=$this->getDoctrine()->getRepository(Produit::class)->chercheProduits();
+        $entityManager=$this->getDoctrine()->getManager();
+        $entityManager->remove($produit);
+        $entityManager->flush();
+
+       
+        //return $this->render('produit/delete.html.twig', ['prod'=>$produit]);
+        return $this->redirectToRoute("produit_list");
+    }
+    /**
+     * @Route("/modifier/produits/{id}/{nprix}", name="produit_modifier")
+     */
+    public function modifier($id,$nprix)
+    {
+        
+        $produit=$this->getDoctrine()->getRepository(Produit::class)->find($id);
+        //$produits=$this->getDoctrine()->getRepository(Produit::class)->chercheProduits();
+        $produit->setPrix($nprix);
+        
+        $entityManager=$this->getDoctrine()->getManager();
+        $entityManager->persist($produit);// facultatif
+        $entityManager->flush();
+
+       
+        //return $this->render('produit/delete.html.twig', ['prod'=>$produit]);
+        return $this->redirectToRoute("produit_list");
+    }
 }
